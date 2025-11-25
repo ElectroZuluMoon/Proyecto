@@ -23,7 +23,7 @@ def pagina_inicio():
     st.title("Sistema de Accidentes Viales ")
     st.image(
         "https://media.istockphoto.com/id/466327320/es/foto/car-crash-colisi%C3%B3n-en-urban-street.jpg?s=612x612&w=0&k=20&c=jVNAuAW6hOGeD07CoS5jiFg5QdqbOGQm5d6o3fOrnhg=",
-        use_container_width=True)
+        width="stretch")
 
 def pagina_registrar(df):
     st.title("Registrar Accidente")
@@ -41,11 +41,11 @@ def pagina_graficos(df):
     st.title("Graficos")
     st.info("Graficos segun los filtros")
 
-def estadisticas(df):
+def pagina_estadisticas(df):
     st.title("Estadisticas")
     st.info("Estadisticas avanzadas")
 
-    
+
 
 
 st.sidebar.title("Menu")
@@ -53,3 +53,18 @@ opcion = st.sidebar.radio(
     "Seleccione una opcion:",
     ["Inicio", "Registrar Accidente", "Consultar / Modificar", "Filtros", "Graficos", "Estadisticas"]
 )
+
+df = cargar_datos()
+
+if opcion == "Inicio":
+    pagina_inicio()
+elif opcion == "Registrar Accidente":
+    pagina_registrar(df)
+elif opcion == "Consultar / Modificar":
+    pagina_consultar_modificar(df)
+elif opcion == "Filtros":
+    pagina_filtros(df)
+elif opcion == "Graficos":
+    pagina_graficos(df)
+elif opcion == "Estadisticas":
+    pagina_estadisticas(df)

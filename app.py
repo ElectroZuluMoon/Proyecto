@@ -28,12 +28,12 @@ df = cargar_datos()
 if opcion == "Inicio":
     pagina_inicio()
 elif opcion == "Registrar Accidente":
-    pagina_registrar(df)
+    st.switch_page("pages/registrar.py")
 elif opcion == "Consultar":
-    pagina_consultar(df)
+    st.switch_page("pages/consultar.py")
 elif opcion == "Filtros":
-    pagina_filtros(df)
+    st.switch_page("pages/filtros.py")
 elif opcion == "Graficos":
-    pagina_graficos(df)
+    st.switch_page("pages/graficas.py")
 elif opcion == "Estadisticas":
-    pagina_estadisticas(df)
+    st.switch_page("pages/estadisticas.py")

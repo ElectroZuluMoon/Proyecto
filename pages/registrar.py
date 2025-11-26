@@ -100,3 +100,6 @@ def pagina_registrar(df):
 
         st.write("### Último registro agregado:")
         st.json(nueva_fila)
+
+df = pd.read_excel("data/Accidentes_50.xlsx")
+pagina_registrar(df)

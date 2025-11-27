@@ -106,7 +106,7 @@ def pagina_consultar(df):
         if submit:
             if codigo_nuevo != codigo_buscar:
                 if codigo_nuevo in df["Codigo_Accidente"].values:
-                    st.error("❌ Ya existe un accidente con ese código.")
+                    st.error("Ya existe un accidente con ese código.")
                     return
             fecha_hora = f"{fecha} {hora}"
 

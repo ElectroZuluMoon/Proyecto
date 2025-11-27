@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd 
-import os
+
 
 RUTA_EXCEL = "data/Accidentes_50.xlsx"
 

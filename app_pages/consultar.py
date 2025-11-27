@@ -133,6 +133,7 @@ def pagina_consultar(df):
 
             st.write("### Registro actualizado:")
             st.json(nueva_fila)  
-df = pd.read_excel("data/Accidentes_50.xlsx")
-pagina_consultar(df)
         
+    if st.button("Volver al menú principal"):
+       st.session_state['opcion'] = "Inicio"
+

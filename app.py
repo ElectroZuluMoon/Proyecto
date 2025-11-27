@@ -1,11 +1,11 @@
 import streamlit as st
 import pandas as pd 
 import os
-from pages.registrar import pagina_registrar
-from pages.consultar import pagina_consultar
-from pages.filtros import pagina_filtros
-from pages.graficas import pagina_graficos
-from pages.estadisticas import pagina_estadisticas
+from app_pages.registrar import pagina_registrar
+from app_pages.consultar import pagina_consultar
+from app_pages.filtros import pagina_filtros
+from app_pages.graficas import pagina_graficos
+from app_pages.estadisticas import pagina_estadisticas
 
 from utils.funciones import cargar_datos, guardar_datos
 
@@ -20,7 +20,7 @@ def pagina_inicio():
 st.sidebar.title("Menu")
 opcion = st.sidebar.radio(
     "Seleccione una opcion:",
-    ["Inicio", "Registrar Accidente", "Consultar", "Filtros", "Graficos", "Estadisticas"]
+    ["Inicio", "Registrar Accidente", "Consultar / Modificar", "Filtros", "Graficos", "Estadisticas"]
 )
 
 df = cargar_datos()
@@ -28,12 +28,12 @@ df = cargar_datos()
 if opcion == "Inicio":
     pagina_inicio()
 elif opcion == "Registrar Accidente":
-    st.switch_page("pages/registrar.py")
-elif opcion == "Consultar":
-    st.switch_page("pages/consultar.py")
+    pagina_registrar(df)
+elif opcion == "Consultar / Modificar":
+    pagina_consultar(df)
 elif opcion == "Filtros":
-    st.switch_page("pages/filtros.py")
+    pagina_filtros(df)
 elif opcion == "Graficos":
-    st.switch_page("pages/graficas.py")
+    pagina_graficos(df)
 elif opcion == "Estadisticas":
-    st.switch_page("pages/estadisticas.py")
+    pagina_estadisticas(df)

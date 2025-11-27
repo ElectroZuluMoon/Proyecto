@@ -61,8 +61,7 @@ def pagina_filtros(df):
     st.dataframe(df_filtrado, width="stretch")
 
     if st.button("Volver al menú principal"):
-        st.switch_page("app.py")
+       st.session_state["opcion"] = "Inicio"
 
-df = pd.read_excel("data/Accidentes_50.xlsx")
-pagina_filtros(df)
+
     

@@ -73,7 +73,7 @@ def pagina_graficos(df):
         ["Tema 1 (Claro)", "Tema 2 (Oscuro)"]
     )
 
-    if tema == "Tema 1(Claro)":
+    if tema == "Tema 1 (Claro)":
         plt.style.use("default")
     else:
         plt.style.use("dark_background")
@@ -129,6 +129,6 @@ def pagina_graficos(df):
 
         
     if st.button("Volver al menú principal"):
-       st.session_state['opcion'] = "Inicio"
-
+       st.session_state["opcion"] = "Inicio"
+       st.rerun()
 

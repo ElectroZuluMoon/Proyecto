@@ -11,19 +11,29 @@ from utils.funciones import cargar_datos, guardar_datos
 
 st.set_page_config(page_title="Accidentes Viales",page_icon="🚧", layout="wide")
 
+
+if "opcion" not in st.session_state:
+    st.session_state["opcion"] = "Inicio"
+
+
 def pagina_inicio():
     st.title("Sistema de Accidentes Viales ")
     st.image(
         "https://media.istockphoto.com/id/466327320/es/foto/car-crash-colisi%C3%B3n-en-urban-street.jpg?s=612x612&w=0&k=20&c=jVNAuAW6hOGeD07CoS5jiFg5QdqbOGQm5d6o3fOrnhg=",
         width="stretch")
 
-st.sidebar.title("Menu")
 opcion = st.sidebar.radio(
     "Seleccione una opcion:",
-    ["Inicio", "Registrar Accidente", "Consultar / Modificar", "Filtros", "Graficos", "Estadisticas"]
-)
+    ["Inicio", "Registrar Accidente", "Consultar / Modificar", "Filtros", "Graficos", "Estadisticas"],
+    index=["Inicio", "Registrar Accidente", "Consultar / Modificar", "Filtros", "Graficos", "Estadisticas"].index(st.session_state["opcion"]),
+    key="menu")
+
+st.session_state["opcion"] = opcion
 
 df = cargar_datos()
+
+st.session_state["df"] = df
+
 
 if opcion == "Inicio":
     pagina_inicio()
@@ -37,3 +47,5 @@ elif opcion == "Graficos":
     pagina_graficos(df)
 elif opcion == "Estadisticas":
     pagina_estadisticas(df)
+
+

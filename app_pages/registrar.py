@@ -76,6 +76,7 @@ def pagina_registrar(df):
      
         if not codigo or not direccion:
             st.error("Por favor llene todos los campos obligatorios")
+            return
         fecha_hora = f"{fecha} {hora}"
 
         nueva_fila = {
@@ -102,4 +103,5 @@ def pagina_registrar(df):
         st.json(nueva_fila)
 
     if st.button("Volver al menú principal"):
-       st.session_state['opcion'] = "Inicio"
+       st.session_state["opcion"] = "Inicio"
+       st.rerun()

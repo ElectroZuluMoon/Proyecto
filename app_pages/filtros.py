@@ -62,6 +62,7 @@ def pagina_filtros(df):
 
     if st.button("Volver al menú principal"):
        st.session_state["opcion"] = "Inicio"
+       st.rerun()
 
 
     

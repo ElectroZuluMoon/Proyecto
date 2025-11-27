@@ -17,7 +17,8 @@ def pagina_consultar(df):
 
     if st.session_state.get("codigo_no_existente",False):
         if st.button("Registrar uno nuevo"):
-           st.switch_page("pages/registrar.py")
+            st.session_state["opcion"] = "Registrar Accidente"
+            st.rerun()
         return
     if "codigo_encontrado" in st.session_state:
         codigo_encontrado = st.session_state["codigo_encontrado"]
@@ -135,5 +136,5 @@ def pagina_consultar(df):
             st.json(nueva_fila)  
         
     if st.button("Volver al menú principal"):
-       st.session_state['opcion'] = "Inicio"
-
+       st.session_state["opcion"] = "Inicio"
+       st.rerun()

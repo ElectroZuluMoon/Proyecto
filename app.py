@@ -1,13 +1,12 @@
 import streamlit as st
 import pandas as pd 
-import os
 from app_pages.registrar import pagina_registrar
 from app_pages.consultar import pagina_consultar
 from app_pages.filtros import pagina_filtros
 from app_pages.graficas import pagina_graficos
 from app_pages.estadisticas import pagina_estadisticas
 
-from utils.funciones import cargar_datos, guardar_datos
+from utils.funciones import cargar_datos
 
 st.set_page_config(page_title="Accidentes Viales",page_icon="🚧", layout="wide")
 

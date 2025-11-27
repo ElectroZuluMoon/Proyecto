@@ -2,6 +2,8 @@ import streamlit as st
 import pandas as pd 
 
 def pagina_filtros(df):
+
+    df = st.session_state.get("df", df)
     st.title("Filtros de accidentes")
     st.write("Seleccione uno o varios criterios para filtrar los accidentes registrados.")
 
@@ -12,7 +14,7 @@ def pagina_filtros(df):
     for col in ["Heridos", "Muertes", "Vehiculos Involucrados"]:
         df[col] = pd.to_numeric(df[col], errors="coerce").fillna(0).astype(int)
 
-    with st.expander("⚙️ Opciones de Filtro", expanded=True):
+    with st.expander(" Opciones de Filtro", expanded=True):
 
         lista_tipos = sorted(df["Clase de Accidente"].dropna().unique())
         tipo_accidente = st.multiselect("Tipo de accidente:", lista_tipos)
@@ -27,12 +29,13 @@ def pagina_filtros(df):
         filtro_muertes = st.checkbox("Accidentes con muertes")
 
         df["Fecha_Ocurrencia"] = pd.to_datetime(df["Fecha_Ocurrencia"], format="mixed", errors="coerce")
-        min_fecha = df["Fecha_Ocurrencia"].min()
-        max_fecha = df["Fecha_Ocurrencia"].max()
+        min_fecha = df["Fecha_Ocurrencia"].min().date()
+        max_fecha = df["Fecha_Ocurrencia"].max().date()
 
         fecha_inicio, fecha_fin = st.date_input(
             "Rango de fechas", [min_fecha, max_fecha]
         )
+
 
     df_filtrado = df.copy()
 
@@ -52,9 +55,13 @@ def pagina_filtros(df):
     if filtro_muertes:
         df_filtrado = df_filtrado[df_filtrado["Muertes"] > 0]
 
+
+    df_filtrado["Fecha_Ocurrencia"] = df_filtrado["Fecha_Ocurrencia"].dt.date
+
+
     df_filtrado = df_filtrado[
-        (df_filtrado["Fecha_Ocurrencia"] >= pd.to_datetime(fecha_inicio)) &
-        (df_filtrado["Fecha_Ocurrencia"] <= pd.to_datetime(fecha_fin))
+        (df_filtrado["Fecha_Ocurrencia"] >= fecha_inicio) &
+        (df_filtrado["Fecha_Ocurrencia"] <= fecha_fin)
     ]
 
     st.subheader(f"Resultados encontrados: {len(df_filtrado)} registros")

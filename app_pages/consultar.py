@@ -125,9 +125,16 @@ def pagina_consultar(df):
                 "Clima": clima
             }
 
-            df.loc[df["Codigo_Accidente"] == codigo_buscar] = nueva_fila
+            filtro = df["Codigo_Accidente"] == codigo_buscar
+
+            for col, value in nueva_fila.items():
+                if col in df.columns:
+                 df.loc[filtro, col] = value
+
 
             guardar_datos(df)
+            st.session_state["df"] = df
+
 
             st.success("Los datos se actualizaron exitosamente")
             st.balloons()

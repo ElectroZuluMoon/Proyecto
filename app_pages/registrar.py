@@ -96,6 +96,8 @@ def pagina_registrar(df):
         df = pd.concat([df, pd.DataFrame([nueva_fila])], ignore_index=True)
 
         guardar_datos(df)
+        st.session_state.df = df
+
         st.success("Accidente registrado correctamente")
         st.balloons()
 

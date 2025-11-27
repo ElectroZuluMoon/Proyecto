@@ -4,7 +4,7 @@ import os
 
 RUTA_EXCEL = "data/Accidentes_50.xlsx"
 
-@st.cache_data
+
 def cargar_datos():
     try:
         df = pd.read_excel(RUTA_EXCEL)

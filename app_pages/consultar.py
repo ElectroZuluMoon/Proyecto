@@ -53,22 +53,18 @@ def pagina_consultar(df): #Se crea la funcion de consultar
 
             with col4:
                 lista_barrios = sorted(df["Barrio"].dropna().unique())
-                barrio = st.selectbox("Barrio", lista_barrios,
-                                      index=lista_barrios.index(fila["Barrio"]))
+                barrio = st.selectbox("Barrio", lista_barrios,index=lista_barrios.index(fila["Barrio"]))
 
             col5, col6, col7 = st.columns(3)
 
             with col5:
-                vehiculos = st.number_input("Vehículos involucrados", min_value=0, step=1,
-                                            value=int(fila["Vehiculos Involucrados"]))
+                vehiculos = st.number_input("Vehículos involucrados", min_value=0, step=1,value=int(fila["Vehiculos Involucrados"]))
 
             with col6:
-                heridos = st.number_input("Heridos", min_value=0, step=1,
-                                          value=int(fila["Heridos"]))
+                heridos = st.number_input("Heridos", min_value=0, step=1, value=int(fila["Heridos"]))
 
             with col7:
-                muertes = st.number_input("Muertes", min_value=0, step=1,
-                                          value=int(fila["Muertes"]))
+                muertes = st.number_input("Muertes", min_value=0, step=1, value=int(fila["Muertes"]))
 
             col8, col9 = st.columns(2)
             with col8:

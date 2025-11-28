@@ -107,9 +107,9 @@ def pagina_registrar(df): #Se crea la funcion de registrar usando el dataframe c
         st.success("Accidente registrado correctamente")#Se manda un mensaje al usuario que el registro se guardo y salen unos globos flotando  
         st.balloons()
 
-        st.write("### Último registro agregado:")#
+        st.write("### Último registro agregado:")#Se le meustra al usuario lo que agrego 
         st.json(nueva_fila)
 
-    if st.button("Volver al menú principal"):
+    if st.button("Volver al menú principal"):#Hay un boton para volver al inicio 
        st.session_state["opcion"] = "Inicio"
        st.rerun()

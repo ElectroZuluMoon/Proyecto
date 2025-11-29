@@ -4,22 +4,28 @@ from utils.funciones import guardar_datos#Se importan las librerias y se llama a
 
 
 def pagina_consultar(df): #Se crea la funcion de consultar
-    st.title(" Consultar / Modificar Accidente") #Titulo
-    st.write("Ingrese el código del accidente para consultarlo o modificar sus datos")#Indicaciones para el usuario
+    st.title("🔎 Consultar / Modificar Accidente") #Titulo
+    st.write("🖊️Ingrese el código del accidente para consultarlo o modificar sus datos")#Indicaciones para el usuario
+
+
+    if st.session_state.get("registro_eliminado", False):
+        st.success("🚮 Registro eliminado exitosamente.")
+        st.session_state["registro_eliminado"] = False
+
 
     codigo_buscar = st.text_input("Código del accidente", "")#Se le da un texto para que el usuario escriba y este se guarda en codigo_buscar
-    buscar = st.button("Buscar")#Cuando el usuario le da al boton se guarda en buscar
+    buscar = st.button("🔍Buscar")#Cuando el usuario le da al boton se guarda en buscar
 
     if buscar: #Se hace un concional de cuando se le da al boton buscar
        if codigo_buscar not in df["Codigo_Accidente"].values: #El codigo entra y si no esta en el df sale un error diciendo que no existe un accidente con ese codigo y le da el valor de True
-           st.error("No existe un accidente con ese código.")
+           st.error("❌ No existe un accidente con ese código.")
            st.session_state["codigo_no_existente"] = True
        else:
            st.session_state["codigo_no_existente"] = False #Sino el codigo se guarda en codigo_buscar
            st.session_state["codigo_encontrado"] = codigo_buscar
 
     if st.session_state.get("codigo_no_existente",False):#Aca entra y como tiene el valor de true se mete en el condicional
-        if st.button("Registrar uno nuevo"):#Se muestra el boton para poder registrar ese codigo
+        if st.button("👤 Registrar uno nuevo"):#Se muestra el boton para poder registrar ese codigo
             st.session_state["opcion"] = "Registrar Accidente"#Cuando le damos al boton cambia a la pagina de registrar accidente
             st.rerun()
         return
@@ -28,7 +34,7 @@ def pagina_consultar(df): #Se crea la funcion de consultar
         
 
         fila = df[df["Codigo_Accidente"] == codigo_buscar].iloc[0]#Se busca en el df el registro de codigo y iloc toma la posicion 0 para guardarlo como una fila 
-        st.success("Registro encontrado. Puede modificar todos los datos")#Sale un mensaje que si fue encontrado el codigo y puede ser modificado
+        st.success("🔓 Registro encontrado. Puede modificar todos los datos")#Sale un mensaje que si fue encontrado el codigo y puede ser modificado
 
         fecha_dt = pd.to_datetime(fila["Fecha_Ocurrencia"], errors="coerce")#Se convierte la fecha guardada en una fecha que pueda leer streamlit
         fecha_valor = fecha_dt.date() if not pd.isna(fecha_dt) else pd.Timestamp.now().date()#Se verifica que el dia sea correcto para guardarlo en fecha_valor sino se usa la fecha actual
@@ -100,12 +106,12 @@ def pagina_consultar(df): #Se crea la funcion de consultar
 
             causa = st.text_area("Causa probable", fila.get("Causa probable", ""))
 
-            submit = st.form_submit_button("Guardar Cambios") #Se crea un boton para guardar el formulario
+            submit = st.form_submit_button("🔒 Guardar Cambios") #Se crea un boton para guardar el formulario
 
         if submit:
             if codigo_nuevo != codigo_buscar:#Se entra a un condicional que si el codigo se cambia y es diferente al que habiamos buscado, entra al ciclo 
                 if codigo_nuevo in df["Codigo_Accidente"].values:#Si el codigo esta en el dataframe sale un error que ya existe  
-                    st.error("Ya existe un accidente con ese código.")
+                    st.error("❌ Ya existe un accidente con ese código.")
                     return
             fecha_hora = f"{fecha} {hora}"#Se convierte la fecha y hora en una sola para ponerla en la variable fecha_hora
 
@@ -135,12 +141,20 @@ def pagina_consultar(df): #Se crea la funcion de consultar
             st.session_state["df"] = df #Actualiza la copia del dataframe dentro de streamlit
 
 
-            st.success("Los datos se actualizaron exitosamente")#Se manda un mensaje al usuario que el registro se actualizo y salen unos globos flotando
+            st.success("✅Los datos se actualizaron exitosamente")#Se manda un mensaje al usuario que el registro se actualizo y salen unos globos flotando
             st.balloons()
 
             st.write("### Registro actualizado:")#Se le muestra al usuario lo que agrego 
             st.json(nueva_fila)  
+
+        if st.button("❌ Borrar registro"):#Se agrega un boton de eliminar 
+            df = df[df["Codigo_Accidente"] != codigo_encontrado]#Se elimina del dataframe el codigo que coincide con codigo_encontrado, filtra los otros dejando los que no tengan ese codigo
+            guardar_datos(df)#Se guardan los datos 
+            st.session_state["df"] = df #Se actualiza la copia del df
+            st.session_state.pop("codigo_encontrado", None) #Se elimina de la memoria codigo_encontrado
+            st.session_state["registro_eliminado"] =True #Se marca una bandera indicando que se elimino el regitro para cuando se vuelva a cargar la pagina, las lineas del inicio pase y ssalga que fue exitosamente borrado
+            st.rerun()
         
-    if st.button("Volver al menú principal"):#Hay un boton para volver al inicio 
+    if st.button("🔙Volver al menú principal"):#Hay un boton para volver al inicio 
        st.session_state["opcion"] = "Inicio"
        st.rerun()

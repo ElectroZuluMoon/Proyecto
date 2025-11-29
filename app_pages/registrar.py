@@ -3,8 +3,8 @@ import pandas as pd
 from utils.funciones import guardar_datos #Se importan las librerias y se llama a la funcion de guardar datos
 
 def pagina_registrar(df): #Se crea la funcion de registrar usando el dataframe cargado
-    st.title("Registrar Accidente")#Titulo de la pagina 
-    st.write("Complete todos los campos para registrar un nuevo accidente")#Un texto que le indica al usuario que debe hacer en esa pagina
+    st.title("👤 Registrar Accidente")#Titulo de la pagina 
+    st.write("🪪 Complete todos los campos para registrar un nuevo accidente")#Un texto que le indica al usuario que debe hacer en esa pagina
 
 
     columnas_nuevas = ["Causa probable", "Estado de la vía", "Clima"] #Se crea las columnas nuevas que tendra el dataframe
@@ -70,15 +70,15 @@ def pagina_registrar(df): #Se crea la funcion de registrar usando el dataframe c
         )
 
         causa = st.text_area("Causa probable (descripción)") #Se crea una area donde el usuario describe cuales fueron esas causas problemas del accidente
-        submit = st.form_submit_button("Guardar Registro")#Se crea un boton para finalizar el formulario y guardarlo 
+        submit = st.form_submit_button("📜 Guardar Registro")#Se crea un boton para finalizar el formulario y guardarlo 
 
     if submit: #Solo se registra todo cuando el boton registrar haya sido presionado por el usuario
         if codigo in df["Codigo_Accidente"].values:#Se inicia una busqueda de que si codigo esta en el df este devuelva un error que ya existe el codigo
-           st.error("Ya existe un accidente con ese código")#Para que cada codigo sea unico 
+           st.error("❌ Ya existe un accidente con ese código")#Para que cada codigo sea unico 
            return
      
         if not codigo or not direccion:#Si los campos de codigo y direccion estan vacios mandara un mensaje de llenar todos los campos 
-            st.error("Por favor llene todos los campos obligatorios")
+            st.error("❌ Por favor llene todos los campos obligatorios")
             return
         
         fecha_hora = f"{fecha} {hora}"#Se convierte la fecha y hora en una sola para ponerla en la variable fecha_hora
@@ -104,12 +104,12 @@ def pagina_registrar(df): #Se crea la funcion de registrar usando el dataframe c
         st.session_state["df"] = df#Actualiza la copia del dataframe dentro de streamlit
 
 
-        st.success("Accidente registrado correctamente")#Se manda un mensaje al usuario que el registro se guardo y salen unos globos flotando  
+        st.success("✅Accidente registrado correctamente")#Se manda un mensaje al usuario que el registro se guardo y salen unos globos flotando  
         st.balloons()
 
         st.write("### Último registro agregado:")#Se le meustra al usuario lo que agrego 
         st.json(nueva_fila)
 
-    if st.button("Volver al menú principal"):#Hay un boton para volver al inicio 
+    if st.button("🔙Volver al menú principal"):#Hay un boton para volver al inicio 
        st.session_state["opcion"] = "Inicio"
        st.rerun()

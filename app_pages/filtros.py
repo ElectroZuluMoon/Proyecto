@@ -4,8 +4,8 @@ import pandas as pd #Se importan las librerias
 def pagina_filtros(df): #Se crea la funcion de filtros
 
     df = st.session_state.get("df", df)
-    st.title("Filtros de accidentes")
-    st.write("Seleccione uno o varios criterios para filtrar los accidentes registrados.")
+    st.title("🔤 Filtros de accidentes")
+    st.write("📝 Seleccione uno o varios criterios para filtrar los accidentes registrados.")
 
     columnas_necesarias = ["Causa probable", "Estado de la vía", "Clima"]#Revsa que las columnas esten en el df, si no estan las agrega vacias
     for col in columnas_necesarias:
@@ -15,7 +15,7 @@ def pagina_filtros(df): #Se crea la funcion de filtros
     for col in ["Heridos", "Muertes", "Vehiculos Involucrados"]:
         df[col] = pd.to_numeric(df[col], errors="coerce").fillna(0).astype(int)#Se convierte en esas columnas a numeros enteros para poder realizar los filtros bien, si hay un valor que no es numero lo pone en nan y luego reemplaza nan por 0
 
-    with st.expander(" Opciones de Filtro", expanded=True):#Se crea un panel desplegable 
+    with st.expander("⚙️ Opciones de Filtro", expanded=True):#Se crea un panel desplegable 
 
         lista_tipos = sorted(df["Clase de Accidente"].dropna().unique())#Selecciona clase de accidente, quita los valores vacios y tamnbien solo deja valores unicos y que guardado en la variable lista_tipos
         tipo_accidente = st.multiselect("Tipo de accidente:", lista_tipos)#Se permiten seleccionar los tipos que hayan 
@@ -65,10 +65,10 @@ def pagina_filtros(df): #Se crea la funcion de filtros
         (df_filtrado["Fecha_Ocurrencia"] <= fecha_fin)
     ]
 
-    st.subheader(f"Resultados encontrados: {len(df_filtrado)} registros") #Se muestra cuantas filas tiene el df filtrado 
+    st.subheader(f"➡️ Resultados encontrados: {len(df_filtrado)} registros") #Se muestra cuantas filas tiene el df filtrado 
     st.dataframe(df_filtrado, width="stretch")#Se muestra el dataframe y se ajusta a la pagina
 
-    if st.button("Volver al menú principal"): #Hay un boton para volver al inicio 
+    if st.button("🔙Volver al menú principal"): #Hay un boton para volver al inicio 
        st.session_state["opcion"] = "Inicio"
        st.rerun()
 

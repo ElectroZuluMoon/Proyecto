@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt #Se importan las librerias
 def pagina_graficos(df):#Se crea la funcion de graficos 
 
     df = st.session_state.get("df", df)
-    st.title("Graficos")
+    st.title("📊 Graficos")
     st.info("Graficos segun los filtros")
 
     columnas_nuevas = ["Causa probable", "Estado de la vía", "Clima"]#Se crea las columnas nuevas que tendra el dataframe
@@ -17,7 +17,7 @@ def pagina_graficos(df):#Se crea la funcion de graficos
     df["Fecha_Ocurrencia"] = pd.to_datetime(df["Fecha_Ocurrencia"], format="mixed", errors="coerce")#Se convierte los valores de fecha de ocurrencia y las convierte en la fecha 
 
 
-    st.subheader("Filtros")
+    st.subheader("🔎 Filtros")
 
     col1, col2 = st.columns(2)#Se crean dos columnas 
 
@@ -65,7 +65,7 @@ def pagina_graficos(df):#Se crea la funcion de graficos
     st.info(f"Registros filtrados: **{len(df_f)}**")#Sale un mensaje informativo con el numero de registros filtrados
 
 
-    st.subheader("Tema de color")
+    st.subheader("🎨 Tema de color")
 
     tema = st.radio(#Se crean las opciones para marcar el color que queramos ver en los graficos
         "Seleccione un tema:",
@@ -78,7 +78,7 @@ def pagina_graficos(df):#Se crea la funcion de graficos
         plt.style.use("dark_background")
 
 
-    st.subheader("Tipo de gráfico")
+    st.subheader("📌 Tipo de gráfico")
 
     tipo_grafico = st.selectbox( #Se crea un menu plegable para seleccionar que tipo de grafico elegir y que sera filtrado
         "Seleccione el tipo de gráfico:",
@@ -88,7 +88,7 @@ def pagina_graficos(df):#Se crea la funcion de graficos
          "Histograma (Accidentes por día)"]
     )
 
-    if st.button("Generar gráfico"):#El ususario le da generar grafico y comiena el condicional
+    if st.button("📊 Generar gráfico"):#El ususario le da generar grafico y comiena el condicional
         if tipo_grafico == "Dispersión (Vehículos vs Heridos)":#Si el usuario eligio dispersion...
             fig, ax = plt.subplots()#Se crea una figura y un eje donde se va a dibujar
             ax.scatter(df_f["Vehiculos Involucrados"], df_f["Heridos"])#Dibuja un grafico de dispersion usando los datos filtrados, el eje x como vehiculos involucrados y el eje y como heridos
@@ -130,7 +130,7 @@ def pagina_graficos(df):#Se crea la funcion de graficos
 
 
         
-    if st.button("Volver al menú principal"): #Hay un boton para volver al inicio 
+    if st.button("🔙Volver al menú principal"): #Hay un boton para volver al inicio 
        st.session_state["opcion"] = "Inicio"
        st.rerun()
 

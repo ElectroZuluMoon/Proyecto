@@ -4,8 +4,8 @@ import matplotlib.pyplot as plt
 def pagina_estadisticas(df):
 
     df = st.session_state.get("df", df)
-    st.title("Estadísticas Generales de Accidentes")
-    st.info("Resumen estadístico según los datos cargados")
+    st.title("📈 Estadísticas Generales de Accidentes")
+    st.info("☠️ Resumen estadístico según los datos cargados")
 
     columnas_nuevas = ["Causa probable", "Estado de la vía", "Clima"]#Se crea las columnas nuevas que tendra el dataframe
     for col in columnas_nuevas: #Hace un ciclo el cual mira en el dataframe cada una de las columnas y mira si estan si no las crea en el df y las crea vacia
@@ -23,18 +23,18 @@ def pagina_estadisticas(df):
     df["Heridos"] = pd.to_numeric(df["Heridos"], errors="coerce")
 
 
-    st.subheader("Indicadores clave")
+    st.subheader("📊 Indicadores clave")
 
     col1, col2, col3 = st.columns(3)
 
     with col1:
-        st.metric("Total de Accidentes", len(df))#Se muestra un cuadro con el valor de accidentes del df
+        st.metric("🚑 Total de Accidentes", len(df))#Se muestra un cuadro con el valor de accidentes del df
 
     with col2:
-        st.metric("Promedio de Heridos", round(df["Heridos"].mean(), 2))#Muestra el promedio de heridos cn 2 decimales
+        st.metric("👨‍🦼‍➡️ Promedio de Heridos", round(df["Heridos"].mean(), 2))#Muestra el promedio de heridos cn 2 decimales
 
     with col3:
-        st.metric("Promedio de Muertos", round(df["Muertes"].mean(), 2))#Muestra el promedio de muerte con 2 decimales
+        st.metric("⚰️ Promedio de Muertos", round(df["Muertes"].mean(), 2))#Muestra el promedio de muerte con 2 decimales
 
     col4, col5 = st.columns(2)
 
@@ -42,13 +42,13 @@ def pagina_estadisticas(df):
     total_dia_top = df["Dia"].value_counts().max()#Devuelve cuantos accidentes hubo en ese dia 
 
     with col4:
-        st.metric("Día con más accidentes", f"{dia_top} ({total_dia_top})")#Muestra junto el dia con mas accidentes 
+        st.metric("📅 Día con más accidentes", f"{dia_top} ({total_dia_top})")#Muestra junto el dia con mas accidentes 
 
     hora_top = df["Hora"].value_counts().idxmax()#Devuelve la hora con mas accidentes 
     total_hora_top = df["Hora"].value_counts().max()#Devuelve cuantos accidentes paso en esa hora
 
     with col5:
-        st.metric("Hora con más accidentes", f"{hora_top}:00 ({total_hora_top})")#Muestra junto la hora con mas accidentes
+        st.metric("🕒 Hora con más accidentes", f"{hora_top}:00 ({total_hora_top})")#Muestra junto la hora con mas accidentes
 
     st.markdown("---")#Linea que divide 
 
@@ -64,7 +64,7 @@ def pagina_estadisticas(df):
         ],
     )
 
-    if st.button("Generar gráfico"):#Cuando el usuario hace click comienza los condicionales
+    if st.button("📊 Generar gráfico"):#Cuando el usuario hace click comienza los condicionales
         if tipo_grafico == "Barras: Accidentes por tipo":
             conteo = df["Clase de Accidente"].value_counts()#Cuenta cuantas veces aparece cada clase de accidente
             fig, ax = plt.subplots()#Se crea una figura para el grafico
@@ -101,6 +101,6 @@ def pagina_estadisticas(df):
             ax.set_ylabel("Cantidad")#La etiqueta del eje y
             st.pyplot(fig)#Muestra el grafico
 
-    if st.button("Volver al menú principal"):#Hay un boton para volver al inicio
+    if st.button("🔙Volver al menú principal"):#Hay un boton para volver al inicio
         st.session_state["opcion"] = "Inicio"
         st.rerun()

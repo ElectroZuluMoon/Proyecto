@@ -23,7 +23,7 @@ def pagina_inicio(): #Creamos una funcion para la pagina de inicio
 
 opcion = st.sidebar.radio( #Se crea un menu lateral con boton de opciones donde se puede seleccionar cada una de las paginas, se inicia en opcion y como opcion al cargar la pagina esta en Inicio entonces comeinza desde ahi y ya el usuario puede comenzar a seleccionar las paginas que desee
     "Seleccione una opcion:",
-    ["Inicio", "Registrar Accidente", "Consultar / Modificar", "Filtros", "Graficos", "Estadisticas"],
+    ["🏠 Inicio", "🪪 Registrar Accidente", "🔎 Consultar / Modificar", "⚙️ Filtros", "📊 Graficos", "📈 Estadisticas"],
     index=["Inicio", "Registrar Accidente", "Consultar / Modificar", "Filtros", "Graficos", "Estadisticas"].index(st.session_state["opcion"]),
     key="menu")
 

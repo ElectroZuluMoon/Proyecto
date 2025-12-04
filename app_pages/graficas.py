@@ -73,7 +73,7 @@ def pagina_graficos(df):#Se crea la funcion de graficos
     )
 
     if tema == "Tema 1 (Claro)":#Se elige el tema segun la opcion otros temas podrian ser "bmh" "fivethirtyeight" "classic"
-        plt.style.use("default")
+        plt.style.use("fivethirtyeight")
     else:
         plt.style.use("dark_background")
 

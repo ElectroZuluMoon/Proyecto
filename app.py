@@ -16,14 +16,19 @@ if "opcion" not in st.session_state: #Aca le damos un condicional para entrar a 
 
 def pagina_inicio(): #Creamos una funcion para la pagina de inicio 
     st.title("Sistema de Accidentes Viales ") #Creamos el titulo de nuestra pagina de inicio
+    st.write("Sistema diseñado para registrar, consultar, analizar y visualizar información de accidentes viales de forma rápida, precisa e intuitiva en Streamlit.")
+    st.info("Dirijase al menú de la izquierda para sus opciones")
+
+
     st.image(
         "https://media.istockphoto.com/id/466327320/es/foto/car-crash-colisi%C3%B3n-en-urban-street.jpg?s=612x612&w=0&k=20&c=jVNAuAW6hOGeD07CoS5jiFg5QdqbOGQm5d6o3fOrnhg=",
         width="stretch") #Agregamos una imagen representativa de lo que estamos trabajando
-    st.write()
+    st.write("Sistema diseñado para registrar, consultar, analizar y visualizar información de accidentes viales de forma rápida, precisa e intuitiva en Streamlit.")
+    st.info("Dirijase al menú de la izquierda para sus opciones")
 
 opcion = st.sidebar.radio( #Se crea un menu lateral con boton de opciones donde se puede seleccionar cada una de las paginas, se inicia en opcion y como opcion al cargar la pagina esta en Inicio entonces comeinza desde ahi y ya el usuario puede comenzar a seleccionar las paginas que desee
     "Seleccione una opcion:",
-    ["🏠 Inicio", "🪪 Registrar Accidente", "🔎 Consultar / Modificar", "⚙️ Filtros", "📊 Graficos", "📈 Estadisticas"],
+    ["Inicio", "Registrar Accidente", "Consultar / Modificar", "Filtros", "Graficos", "Estadisticas"],
     index=["Inicio", "Registrar Accidente", "Consultar / Modificar", "Filtros", "Graficos", "Estadisticas"].index(st.session_state["opcion"]),
     key="menu")
 

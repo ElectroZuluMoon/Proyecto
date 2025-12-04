@@ -5,7 +5,7 @@ from utils.funciones import guardar_datos#Se importan las librerias y se llama a
 
 def pagina_consultar(df): #Se crea la funcion de consultar
     st.title("🔎 Consultar / Modificar Accidente") #Titulo
-    st.write("🖊️Ingrese el código del accidente para consultarlo o modificar sus datos")#Indicaciones para el usuario
+    st.write("🖊️ Ingrese el código del accidente para consultarlo o modificar sus datos")#Indicaciones para el usuario
 
 
     if st.session_state.get("registro_eliminado", False):
